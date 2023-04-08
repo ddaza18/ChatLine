@@ -9,6 +9,6 @@
 - Duplicidad de usuarios "usernames" controlada
 # Estado
 - En desarrollo
-#Integraciones futuras
+# Integraciones futuras
 - Spring boot (CASOS EMP)
 - Entono Docker
