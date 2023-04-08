@@ -11,6 +11,7 @@ module.exports = (io) =>{
                 msg:datos,  
                 username:socket.nickname
            });
+           console.log("Mensaje enviado al SV")
         });
 
         socket.on('nuevo usuario chat', (datos, callback) =>{
@@ -30,6 +31,7 @@ module.exports = (io) =>{
                 return;
             }else{
                 nombresUsuarios.splice(nombresUsuarios.indexOf(socket.nickname), 1); //busca su poscicion en el array y lo elimina con splice()
+                console.log("Un usuario se a desconectado");
                 actualizarUsuarios();
             }
         });

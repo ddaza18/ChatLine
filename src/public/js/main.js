@@ -26,24 +26,34 @@ $(function(){
         if(user == datos.username){
             color = '#9ff4c5';
         }
-        chat.append(`<div class="msg-area mb-2" style="background-color:${color}"><b>${datos.username}</b><p class="msg">${datos.msg}</div>`);
+        if(datos.msg == ''){ //valida que los datos no lleguen nulos
+            window.alert("El mensaje no puede estar vacio.");
+            return;
+        }else{
+            chat.append(`<div class="msg-area mb-2" style="background-color:${color}"><b>${datos.username}</b><p class="msg">${datos.msg}</div>`);
+        }
     });
 
     //nuevo usuario en chat
     formUser.submit(ev =>{
         ev.preventDefault();
         console.log("Enviando...");
-        socket.emit('nuevo usuario chat', nombreUsuario.val(), datos =>{
-            if(datos){
+        if (nombreUsuario.val().trim() === '') { //valida que el campo del username no este vacio al momento de ingresar al chatLine
+            window.alert("El campo 'nombre de usuario' no puede estar vacio.");
+            return;
+        }else{
+        socket.emit('nuevo usuario chat', nombreUsuario.val(), datos =>{        
+            if(datos != null && datos){
                 user = nombreUsuario.val();
                 $('#user_nuevo').hide();
                 $('#content-wrap').show();
             }else{
-                formError.html(`<div class="alert alert-danger">Usuario Existente en el Chat</div>`);
-            }
-
+                formError.html(`<div class="alert alert-danger">El usuario ya existe en el chat</div>`);
+            } 
+           
             nombreUsuario.val('');
         });
+    }
     });
 
     //obtener los usuarios conectados
@@ -56,7 +66,7 @@ $(function(){
         for(let i = 0; i < datos.length; i++){
             if(user == datos[i]){
                 color = '#027f43';
-                salir = `<a class="enlace-salir" href="/"><i class="fas fa-sign-out-alt">Salir</i></a>`;
+                salir = `<a class="enlace-salir" style="text-decoration: none;" href="/"><i class="fas fa-sign-out-alt">Salir</i></a>`;
             }else{
                 color = '#000';
                 salir = '';
