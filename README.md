@@ -10,5 +10,4 @@
 # Estado
 - En desarrollo
 # Integraciones futuras
-- Spring boot (CASOS EMP)
-- Entono Docker
+- Entono Docker -> EN DESARROLLO
